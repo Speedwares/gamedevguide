@@ -8,6 +8,7 @@ import Layout from '../components/Layout'
 // import { getSidebarExpandedKey } from '../store/selectors'
 import 'katex/dist/katex.min.css'
 import siteCfg from '../../SiteCfg'
+import './fontStyle.css'
 
 import {
   prettifySlug,
