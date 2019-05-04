@@ -15,6 +15,10 @@ www/public
 # cache-dirs
 **/.cache
 
+
+**/src/**
+gatsby-config.js
+
 # ignore built packages
 packages/**/*.js
 !packages/gatsby/cache-dir/**/*.js

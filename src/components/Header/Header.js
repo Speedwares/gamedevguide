@@ -6,11 +6,15 @@ import React from 'react'
 import { Layout as AntdLayout } from 'antd'
 import Menu from '../Menu'
 
+
 const { Header: AntdHeader } = AntdLayout
 
-const Header = ({ siteNavTitle }) => (
+
+
+const Header = ({ siteNavTitle, headerCollapsed }) => (
   <AntdHeader>
-    <Menu siteNavTitle={siteNavTitle} />
+
+    <Menu siteNavTitle={siteNavTitle} headerCollapsed={headerCollapsed} />
   </AntdHeader>
 )
 // const mapDispatchToProps = {

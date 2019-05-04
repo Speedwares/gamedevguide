@@ -15,13 +15,13 @@ const { Sider: AntdSider } = AntdLayout
 const AntdSubMenu = AntdMenu.SubMenu
 
 class SidebarContents extends Component {
-  state = {
-    collapsed: false,
-  }
+  // state = {
+  //   collapsed: false,
+  // }
 
-  onCollapse = (collapsed /* , type */) => {
-    this.setState({ collapsed })
-  }
+  // onCollapse = (collapsed /* , type */) => {
+  //   this.setState({ collapsed })
+  // }
 
   // onBreakpoint = broken => {
   //   console.log(broken)
@@ -163,7 +163,7 @@ class SidebarContents extends Component {
           }
         `}
         render={({ guides }) => {
-          const { sidebarRoot } = this.props
+          const { sidebarRoot, collapsed } = this.props
           const mdNodes = guides.edges
             .map(({ node }) => (node.childMdx ? node.childMdx : node.childMarkdownRemark))
             .filter(node => node.fields.slug.startsWith(sidebarRoot))
@@ -214,14 +214,14 @@ class SidebarContents extends Component {
                 theme={siteCfg.theme.LightVariant}
                 collapsible
                 // eslint-disable-next-line react/destructuring-assignment
-                collapsed={this.state.collapsed}
+                collapsed={collapsed}
                 onCollapse={this.onCollapse}
                 trigger={null}
                 breakpoint={siteCfg.theme.breakpoint}
                 collapsedWidth="0"
                 onBreakpoint={this.onBreakpoint}
                 width={siteCfg.theme.sidebarMenuWidth}
-                style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+                style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, transition: 'all 500ms linear' }}
               >
                 <AntdMenu
                   mode="inline"

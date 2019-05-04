@@ -1,5 +1,16 @@
 import Typography from 'typography'
 import stAnnesTheme from 'typography-theme-st-annes'
+
+stAnnesTheme.overrideThemeStyles = ({ rhythm }, options) => ({
+  'h2,h3,h1,h4': {
+    marginBottom: rhythm(1/2),
+    marginTop: rhythm(2),
+  },
+  p: {
+    marginBottom: rhythm(1/2),
+    marginTop: rhythm(1/3),
+  }
+})
 // const CodePlugin = require('typography-plugin-code').default
 
 // stAnnesTheme.plugins = [new CodePlugin()]

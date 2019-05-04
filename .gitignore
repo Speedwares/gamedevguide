@@ -70,3 +70,7 @@ yarn-error.log
 
 .vscode/
 !.vscode/launch.json
+
+.prettierignore
+.eslintrc
+.idea/

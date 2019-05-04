@@ -201,6 +201,22 @@ module.exports = {
         },
       },
     },
+   {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [`title`, `path`, `content`],
+        // How to resolve each field`s value for a supported node type
+        resolvers: {
+          // For any node of type MarkdownRemark, list how to resolve the fields` values
+          MarkdownRemark: {
+            title: node => node.fields.pageTitle,
+            path: node => node.fields.slug,
+            content: node => node.html
+          },
+        },
+      },
+    }
     // {
     //   resolve: 'gatsby-plugin-google-analytics',
     //   options: {
