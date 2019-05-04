@@ -5,6 +5,9 @@ flow-typed
 # webfont demo styles
 **/specimen_files
 
+**/src/**
+gatsby-config.js
+
 # built sites
 benchmarks/**/public
 e2e-tests/**/public
@@ -14,6 +17,7 @@ www/public
 
 # cache-dirs
 **/.cache
+
 
 # ignore built packages
 packages/**/*.js
