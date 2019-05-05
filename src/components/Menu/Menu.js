@@ -10,20 +10,11 @@ import Search from '../Search'
 
 class Menu extends Component {
 
-  state = {
-     collapsed: false
-  };
 
   toggle = () => {
-    const { headerCollapsed } = this.props
-    this.setState({
-      // eslint-disable-next-line react/destructuring-assignment,react/no-access-state-in-setstate
-      collapsed: !this.state.collapsed,
-    });
+    const { headerCollapsed, collapsed } = this.props
     // eslint-disable-next-line react/destructuring-assignment
-    console.log(this.state.collapsed)
-    // eslint-disable-next-line react/destructuring-assignment
-    headerCollapsed(!this.state.collapsed)
+    headerCollapsed(!collapsed)
   }
 
 
@@ -46,16 +37,15 @@ class Menu extends Component {
       }
     `}
         render={data => {
-          const { siteNavTitle } = this.props
+          const { siteNavTitle, collapsed } = this.props
           const menuItems = data.allMenuItems.edges.map(edge => edge.node).reverse()
           return (
             <AntdMenu theme={siteCfg.theme.DarkVariant} mode="horizontal">
               <AntdIcon
                 className="trigger"
+                type={collapsed ? 'menu-unfold' : 'menu-fold'}
                 // eslint-disable-next-line react/destructuring-assignment
-                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                // eslint-disable-next-line react/destructuring-assignment
-                onClick={(e) => this.toggle(e,this.state.collapsed)}
+                onClick={(e) => this.toggle(e,collapsed)}
               />
               <AntdMenu.Item>
                 <Link to="/">{siteNavTitle}</Link>

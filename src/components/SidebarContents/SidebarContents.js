@@ -163,7 +163,7 @@ class SidebarContents extends Component {
           }
         `}
         render={({ guides }) => {
-          const { sidebarRoot, collapsed } = this.props
+          const { sidebarRoot, collapsed, leftMargin } = this.props
           const mdNodes = guides.edges
             .map(({ node }) => (node.childMdx ? node.childMdx : node.childMarkdownRemark))
             .filter(node => node.fields.slug.startsWith(sidebarRoot))
@@ -220,7 +220,7 @@ class SidebarContents extends Component {
                 breakpoint={siteCfg.theme.breakpoint}
                 collapsedWidth="0"
                 onBreakpoint={this.onBreakpoint}
-                width={siteCfg.theme.sidebarMenuWidth}
+                width={leftMargin}
                 style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, transition: 'all 500ms linear' }}
               >
                 <AntdMenu

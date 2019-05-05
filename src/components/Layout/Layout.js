@@ -17,6 +17,12 @@ class RootLayout extends Component {
     leftMargin: siteCfg.theme.sidebarMenuWidth
   };
 
+  componentDidMount() {
+    window.addEventListener('resize', this.resize.bind(this));
+    this.resize();
+    console.log('first')
+  }
+
 
   toggle = (collapsedState) => {
     this.setState({
@@ -27,11 +33,20 @@ class RootLayout extends Component {
       this.setState({
         leftMargin: 0
       });
-    } else {
+    } else if(!collapsedState && window.innerWidth > 620) {
       this.setState({
         leftMargin: siteCfg.theme.sidebarMenuWidth
       });
+    } else {
+    	this.setState({
+        leftMargin: 250
+      });
     }
+  }
+
+  resize (){
+    const currentHideNav = (window.innerWidth <= 760);
+    this.toggle(currentHideNav)
   }
 
   render() {
@@ -52,7 +67,7 @@ class RootLayout extends Component {
         render={data => {
           const { siteNavTitle, siteTitleLong, siteDescription, siteKeywords } = data.site.siteMetadata
           const { children, sidebarRoot } = this.props
-          const { collapsed } = this.state
+          const { collapsed, leftMargin } = this.state
           return (
             <AntdLayout>
               <Helmet
@@ -66,10 +81,10 @@ class RootLayout extends Component {
               </Helmet>
 
               <AntdLayout>
-                <SidebarContents sidebarRoot={sidebarRoot} collapsed={collapsed} />
+                <SidebarContents sidebarRoot={sidebarRoot} collapsed={collapsed} leftMargin={leftMargin} />
                 {/* eslint-disable-next-line react/destructuring-assignment */}
                 <AntdLayout style={{ marginLeft: this.state.leftMargin }}>
-                  <Header siteNavTitle={siteNavTitle} headerCollapsed={this.toggle} />
+                  <Header siteNavTitle={siteNavTitle} headerCollapsed={this.toggle} collapsed={collapsed} />
                   <AntdLayout>
                     <AntdContent
                       style={{

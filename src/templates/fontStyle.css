@@ -7,14 +7,14 @@ p {
   margin-bottom: 0.78125rem;
 }
 
-@media screen and (max-width: 720px) {
-  .ant-layout-sider{
+@media screen and (max-width: 995px) {
+  .ant-anchor-wrapper{
     display: none
   }
 }
 
-@media screen and (min-width: 721px) {
-  .ant-layout-sider{
+@media screen and (min-width: 996px) {
+  .ant-anchor-wrapper{
     display: block;
   }
 }
