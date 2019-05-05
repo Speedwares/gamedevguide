@@ -18,3 +18,10 @@ p {
     display: block;
   }
 }
+
+@media screen and (max-width: 620px) {
+  .ant-menu-item{
+    font-size: 12px;
+  }
+}
+

@@ -12,7 +12,6 @@ class Search extends Component {
     this.state = {
       query: ``,
       results: [],
-      loading: false,
       visible: false
     }
   }
@@ -23,13 +22,6 @@ class Search extends Component {
     });
     // eslint-disable-next-line react/destructuring-assignment
     console.log(this.state.results)
-  }
-
-  handleOk = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
   }
 
   handleCancel = () => {
@@ -57,7 +49,7 @@ class Search extends Component {
   }
 
   render() {
-  	const { visible, loading } = this.state;
+  	const { visible } = this.state;
     return (
       <div>
                   <AntdSearch
