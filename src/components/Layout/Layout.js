@@ -14,14 +14,15 @@ const { Content: AntdContent } = AntdLayout
 class RootLayout extends Component {
   state = {
     collapsed: false,
-    leftMargin: 0,
+    leftMargin: siteCfg.theme.sidebarMenuWidth,
     sidebarActive: true
   };
 
   componentDidMount() {
     window.addEventListener('resize', this.resize.bind(this));
-        // eslint-disable-next-line react/destructuring-assignment
-     if (this.state.sidebarActive === false){
+    this.resize();
+    // eslint-disable-next-line react/destructuring-assignment
+     if (!this.state.sidebarActive){
       this.setState({
         leftMargin: 0
       });
@@ -39,7 +40,7 @@ class RootLayout extends Component {
         leftMargin: 0
       });
        // eslint-disable-next-line react/destructuring-assignment
-    } else if((!collapsedState) && (window.innerWidth > 620) && (this.state.sidebarActive === true)) {
+    } else if(!collapsedState && window.innerWidth > 620 && this.state.sidebarActive) {
       // eslint-disable-next-line react/destructuring-assignment
       console.log(this.state.sidebarActive)
       this.setState({
@@ -58,16 +59,10 @@ class RootLayout extends Component {
       sidebarActive: sidebarState
     });
     if(sidebarState){
-    console.log('fdsf')
     this.setState({
       leftMargin: 0
     });
-    }else{
-      this.setState({
-      leftMargin: 0
-    });
     }
-   
     // eslint-disable-next-line react/destructuring-assignment
     console.log(this.state.leftMargin)
   }
