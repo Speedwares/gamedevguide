@@ -38,15 +38,27 @@ class Menu extends Component {
     `}
         render={data => {
           const { siteNavTitle, collapsed } = this.props
+        
           const menuItems = data.allMenuItems.edges.map(edge => edge.node).reverse()
-          return (
-            <AntdMenu theme={siteCfg.theme.DarkVariant} mode="horizontal">
+
+          const checkSidebar = () => { 
+          const { sidebarActive } = this.props
+          let sidebar = ''
+          if (sidebarActive){
+            sidebar =
               <AntdIcon
                 className="trigger"
                 type={collapsed ? 'menu-unfold' : 'menu-fold'}
                 // eslint-disable-next-line react/destructuring-assignment
                 onClick={(e) => this.toggle(e,collapsed)}
               />
+          }
+          return sidebar
+        }
+        
+          return (
+          <AntdMenu theme={siteCfg.theme.DarkVariant} mode="horizontal">
+         {checkSidebar()}
               <AntdMenu.Item>
                 <Link to="/">{siteNavTitle}</Link>
               </AntdMenu.Item>

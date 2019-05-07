@@ -14,13 +14,18 @@ const { Content: AntdContent } = AntdLayout
 class RootLayout extends Component {
   state = {
     collapsed: false,
-    leftMargin: siteCfg.theme.sidebarMenuWidth
+    leftMargin: 0,
+    sidebarActive: true
   };
 
   componentDidMount() {
     window.addEventListener('resize', this.resize.bind(this));
-    this.resize();
-    console.log('first')
+        // eslint-disable-next-line react/destructuring-assignment
+     if (this.state.sidebarActive === false){
+      this.setState({
+        leftMargin: 0
+      });
+    }
   }
 
 
@@ -28,12 +33,15 @@ class RootLayout extends Component {
     this.setState({
       collapsed: collapsedState,
     });
-
-    if (collapsedState){
+       // eslint-disable-next-line react/destructuring-assignment
+    if (collapsedState || this.state.sidebarActive === false){
       this.setState({
         leftMargin: 0
       });
-    } else if(!collapsedState && window.innerWidth > 620) {
+       // eslint-disable-next-line react/destructuring-assignment
+    } else if((!collapsedState) && (window.innerWidth > 620) && (this.state.sidebarActive === true)) {
+      // eslint-disable-next-line react/destructuring-assignment
+      console.log(this.state.sidebarActive)
       this.setState({
         leftMargin: siteCfg.theme.sidebarMenuWidth
       });
@@ -42,6 +50,26 @@ class RootLayout extends Component {
         leftMargin: 250
       });
     }
+  }
+
+  hideSidebar = (sidebarState) =>{
+    console.log('reahed')
+    this.setState({
+      sidebarActive: sidebarState
+    });
+    if(sidebarState){
+    console.log('fdsf')
+    this.setState({
+      leftMargin: 0
+    });
+    }else{
+      this.setState({
+      leftMargin: 0
+    });
+    }
+   
+    // eslint-disable-next-line react/destructuring-assignment
+    console.log(this.state.leftMargin)
   }
 
   resize (){
@@ -67,7 +95,7 @@ class RootLayout extends Component {
         render={data => {
           const { siteNavTitle, siteTitleLong, siteDescription, siteKeywords } = data.site.siteMetadata
           const { children, sidebarRoot } = this.props
-          const { collapsed, leftMargin } = this.state
+          const { collapsed, leftMargin, sidebarActive } = this.state
           return (
             <AntdLayout>
               <Helmet
@@ -81,10 +109,10 @@ class RootLayout extends Component {
               </Helmet>
 
               <AntdLayout>
-                <SidebarContents sidebarRoot={sidebarRoot} collapsed={collapsed} leftMargin={leftMargin} />
+                <SidebarContents sidebarRoot={sidebarRoot} collapsed={collapsed} leftMargin={leftMargin} removeSidebar = {this.hideSidebar} />
                 {/* eslint-disable-next-line react/destructuring-assignment */}
                 <AntdLayout style={{ marginLeft: this.state.leftMargin }}>
-                  <Header siteNavTitle={siteNavTitle} headerCollapsed={this.toggle} collapsed={collapsed} />
+                  <Header siteNavTitle={siteNavTitle} headerCollapsed={this.toggle} collapsed={collapsed} sidebarActive={sidebarActive} />
                   <AntdLayout>
                     <AntdContent
                       style={{

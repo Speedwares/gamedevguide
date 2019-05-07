@@ -11,10 +11,11 @@ const { Header: AntdHeader } = AntdLayout
 
 
 
-const Header = ({ siteNavTitle, headerCollapsed, collapsed }) => (
+const Header = ({ siteNavTitle, headerCollapsed, collapsed, sidebarActive }) => (
+	
   <AntdHeader>
 
-    <Menu siteNavTitle={siteNavTitle} headerCollapsed={headerCollapsed} collapsed={collapsed} />
+    <Menu siteNavTitle={siteNavTitle} headerCollapsed={headerCollapsed} collapsed={collapsed} sidebarActive = {sidebarActive}/>
   </AntdHeader>
 )
 // const mapDispatchToProps = {

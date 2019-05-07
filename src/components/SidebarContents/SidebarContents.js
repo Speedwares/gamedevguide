@@ -27,6 +27,35 @@ class SidebarContents extends Component {
   //   console.log(broken)
   // }
 
+  constructor(props){
+    super(props)
+// eslint-disable-next-line react/destructuring-assignment
+    if(!this.props.sidebarRoot){
+      // eslint-disable-next-line react/destructuring-assignment
+      this.hideSidebar()
+      
+    }else{
+      this.showSidebar()
+    }
+
+  }
+
+  hideSidebar = () => {
+    const { removeSidebar } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    removeSidebar(false)
+  }
+
+  showSidebar = () => {
+    const { removeSidebar } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    removeSidebar(true)
+  }
+
+
+
+
+
   filterHeadingsTocMV = inTOCModelView => {
     const retTree = {}
     const filterHeadings = (curRetRoot, tocTree) => {
@@ -163,7 +192,9 @@ class SidebarContents extends Component {
           }
         `}
         render={({ guides }) => {
-          const { sidebarRoot, collapsed, leftMargin } = this.props
+     
+          const { sidebarRoot, collapsed, leftMargin, removeSidebar } = this.props
+        
           const mdNodes = guides.edges
             .map(({ node }) => (node.childMdx ? node.childMdx : node.childMarkdownRemark))
             .filter(node => node.fields.slug.startsWith(sidebarRoot))
@@ -234,6 +265,12 @@ class SidebarContents extends Component {
                 </AntdMenu>
               </AntdSider>
             )
+          } 
+          if (!bDisplaySidebar) {
+         return (
+             // eslint-disable-next-line no-lone-blocks, no-unused-expressions, react/destructuring-assignment
+            <div>{removeSidebar}</div>
+            )     
           }
 
           return <div />
